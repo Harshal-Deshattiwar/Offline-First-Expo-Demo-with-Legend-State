@@ -31,13 +31,13 @@ const Expense = ({ item }) => {
       entering={SlideInDown}
     >
       <View
-        style={[styles.expenseColorBlock, { backgroundColor: item.color }]}
+        style={[styles.expenseColorBlock, { backgroundColor: item?.color }]}
       />
       <View style={styles.expenseDetails}>
-        <Text style={styles.expenseTitle}>{item.title}</Text>
-        <Text style={styles.expenseDate}>{item.date}</Text>
+        <Text style={styles.expenseTitle}>{item?.title}</Text>
+        <Text style={styles.expenseDate}>{item?.date}</Text>
       </View>
-      <Text style={styles.expenseAmount}>${item.amount.toFixed(2)}</Text>
+      <Text style={styles.expenseAmount}>${item?.amount?.toFixed(2)}</Text>
     </Animated.View>
   );
 };

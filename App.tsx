@@ -30,6 +30,23 @@ configureObservablePersistence({
   },
 });
 
+const initialState =[
+  {
+    id: "1",
+    title: "Groceries",
+    amount: 50.0,
+    color: getRandomPastelColor(),
+    date: new Date().toLocaleString(),
+  },
+  {
+    id: "2",
+    title: "Electric Bill",
+    amount: 75.0,
+    color: getRandomPastelColor(),
+    date: new Date().toLocaleString(),
+  },
+]
+
 const state = observable({
   expenses: [
     {
@@ -75,6 +92,11 @@ const App = observer(() => {
     };
     state.expenses.set((currentExpenses) => [...currentExpenses, newExpense]);
   };
+  const clearExpense = () => {
+    // state.expenses.delete();
+    state.expenses.set((currentExpenses) => [currentExpenses[0]]);
+    console.log(state.expenses);
+  };
 
   return (
     <View style={styles.container}>
@@ -82,10 +104,14 @@ const App = observer(() => {
       <Header />
       <FlatList
         data={expenses}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <Expense item={item} />}
+        keyExtractor={(item) => item?.id}
+        renderItem={({ item }) => {
+          console.log(item,'item >>>>>>>>');
+          
+        return <Expense item={item} />}}
       />
       <Button title="Add Expense" onPress={addExpense} />
+      <Button title="Clear" onPress={clearExpense} />
     </View>
   );
 });
